@@ -13,6 +13,8 @@
     <table>
         <tr class="row">
             <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id="pencil" value="pencil" onclick="changeMode(this.id)"></td>
+            <div class="slidecontainer">
+                <input type="range" id="brushes" name="brushes" min="1" max="50" value="5" style="display: none"></div>
             <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id="eraser" value="eraser" onclick="changeMode(this.id)"></td>
             <td><input type="button" style="background-color: #220901; color: white;width: 80px; height: 80px;" id="text" value="text" onclick="changeMode(this.id)"></td>
             <td><input type="text" style="display: none" id="text-input" value=""></td>
@@ -28,7 +30,8 @@
         </tr>
         <tr class="row">
             <td><input type="button" style="background-color: #621708; color: white;width: 80px; height: 80px;" id="circle" value="circle" onclick="changeMode(this.id)"></td>
-            <td><input type="button" style="background-color: #941B0C; color: white;width: 80px; height: 80px;" id="square" value="square" onclick="changeMode(this.id)"></td>
+            <td><input type="button" style="background-color: #941B0C; color: white;width: 80px; height: 80px;" id="square" value="rectangle" onclick="changeMode(this.id)"></td>
+            <td><input type="button" style="background-color: #F6AA1C; color: white;width: 80px; height: 80px;" id="triangle" value="triangle" onclick="changeMode(this.id)"></td>
             <td><input type="button" style="background-color: #BC3908; color: white;width: 80px; height: 80px;" id="reset" value="reset" onclick="reset()"></td>
         </tr>
     </table>

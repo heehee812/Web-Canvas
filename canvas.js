@@ -21,12 +21,15 @@ var isMouseActive = false;
 
 function changeMode(a) {
     modee = a;
+    if (a == "pencil")
+        document.getElementById('brushes').style.display = "block";
 }
 
 function mode() {
     canvas.addEventListener(downEvent, function(e) {
         console.log(modee);
         if (modee == "text") {
+            canvas.style.cursor = "url('text.png'), crosshair";
             x1 = e.offsetX;
             y1 = e.offsetY;
             document.getElementById('text-input').style.display = "block";
@@ -49,27 +52,39 @@ function mode() {
             })
 
         } else if (modee == "pencil") {
+            canvas.style.cursor = "url('pecil.png', crosshair)";
             ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
-            ctx.lineWidth = 5;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             x1 = e.offsetX;
             y1 = e.offsetY;
         } else if (modee == "circle") {
+            canvas.style.cursor = "url('cross.png', pointer)";
             ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
             x1 = e.offsetX;
             y1 = e.offsetY;
         } else if (modee == "square") {
+            canvas.style.cursor = "url('cross.png'), pointer";
             ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
             x1 = e.offsetX;
             y1 = e.offsetY;
+
+        } else if (modee == "triangle") {
+            canvas.style.cursor = "url('cross.png'), pointer";
+            ctx = canvas.getContext('2d');
+            ctx.globalCompositeOperation = "source-over";
+            isMouseActive = true;
+            x1 = e.offsetX;
+            y1 = e.offsetY;
+
         } else if (modee == "eraser") {
+            canvas.style.cursor = "url('eraser.png')";
             ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = "destination-out";
             isMouseActive = true;
@@ -104,6 +119,14 @@ function mode() {
             ctx.fillStyle = "#941B0C";
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
+
+        } else if (modee == "triangle") {
+            x2 = e.offsetX;
+            y2 = e.offsetY;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x1 + (((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)) ** (1 / Math.sqrt(3)), y2);
+            ctx.lineTo(x1 - (((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)) ** (1 / Math.sqrt(3)), y2);
+            ctx.fillStyle = "#F6AA1C";
         } else if (modee == "eraser") {
             x2 = e.offsetX;
             y2 = e.offsetY;
@@ -119,6 +142,8 @@ function mode() {
         isMouseActive = false;
         if (modee == "square") {
             ctx.fillRect(x1, y1, x2, y2);
+        } else if (modee == "triangle") {
+            ctx.fill();
         }
         state = ctx.getImageData(0, 0, canvas.width, canvas.height);
         window.history.pushState(state, null);
@@ -183,4 +208,9 @@ upload.onchange = function upload() {
     var src = URL.createObjectURL(file);
 
     img.src = src;
+}
+
+var slider = document.getElementById("brushes");
+slider.oninput = function() {
+    ctx.lineWidth = this.value;
 }
