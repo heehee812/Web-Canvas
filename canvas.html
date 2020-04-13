@@ -10,20 +10,23 @@
     <body> 
         <table>
             <tr class="row">
-                <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id= "pencil" value="pencil" onclick= "mode(this.id)"></td>
-                <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id= "eraser" value="eraser" onclick= "mode(this.id)"></td>
+                <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id= "pencil" value="pencil" onclick= "changeMode(this.id)"></td>
+                <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id= "eraser" value="eraser" onclick= "changeMode(this.id)"></td>
+                <td><input type="button" style="background-color: #220901; color: white;width: 80px; height: 80px;" id= "text" value="text" onclick= "changeMode(this.id)"></td>
+                <td><input type="text"  style="display: none" id= "text-input" value= ""></td>
                 <td><input type="button" style="background-color: #708B75; color: white;width: 80px; height: 80px;" id= "color" value="color" onclick= "color()"></td>
                 <td><input type="color" style="display: none" id="color-block"></td>
-                <td><input type="button" style="background-color: #220901; color: white;width: 80px; height: 80px;" id= "text" value="text" onclick= "mode(this.id)"></td>
-                <td><input type="text"  style="display: none" id= "text-input" value= ""></td>
             </tr>
             <tr class="row">
                 <td><input type="button" style="background-color: #9AB87A; color: white;width: 80px; height: 80px;" id= "download" value="download" onclick= "download()"></td>
                 <td><input type="button" style="background-color: #F6AA1C; color: white;width: 80px; height: 80px;" id= "upload" value="upload" onclick= "upload()"></td>
+                <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id= "redo" value="redo" onclick= "redo()"></td>
+                <td><input type="button" style="background-color: #708B75; color: white;width: 80px; height: 80px;" id= "undo" value="undo" onclick= "undo()"></td>
+
             </tr>
             <tr class="row">
-                <td><input type="button" style="background-color: #621708; color: white;width: 80px; height: 80px;" id= "circle" value="circle" onclick= "mode(this.id)"></td>
-                <td><input type="button" style="background-color: #941B0C; color: white;width: 80px; height: 80px;" id= "square" value="square" onclick= "mode(this.id)"></td>
+                <td><input type="button" style="background-color: #621708; color: white;width: 80px; height: 80px;" id= "circle" value="circle" onclick= "changeMode(this.id)"></td>
+                <td><input type="button" style="background-color: #941B0C; color: white;width: 80px; height: 80px;" id= "square" value="square" onclick= "changeMode(this.id)"></td>
                 <td><input type="button" style="background-color: #BC3908; color: white;width: 80px; height: 80px;" id= "reset" value="reset" onclick= "reset()"></td>
             </tr>
         </table> 
