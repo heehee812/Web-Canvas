@@ -10,6 +10,12 @@
 </head>
 
 <body>
+    <label id="color_label"></label>
+    <div id = "color-picker" >
+        <canvas id="color_strip" width = "30" height= "150"></canvas>
+        <canvas id="color_block" width = "150" height= "150"></canvas>
+        
+    </div>
     <table>
         <tr class="row">
             <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id="pencil" value="pencil" onclick="changeMode(this.id)"></td>
@@ -18,8 +24,8 @@
             <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id="eraser" value="eraser" onclick="changeMode(this.id)"></td>
             <td><input type="button" style="background-color: #220901; color: white;width: 80px; height: 80px;" id="text" value="text" onclick="changeMode(this.id)"></td>
             <td><input type="text" style="display: none" id="text-input" value=""></td>
-            <td><input type="button" style="background-color: #708B75; color: white;width: 80px; height: 80px;" id="color" value="color" onclick="color()"></td>
-            <td><input type="color" style="display: none" id="color-block"></td>
+
+            
         </tr>
         <tr class="row">
             <td><input type="button" style="background-color: #9AB87A; color: white;width: 80px; height: 80px;" id="download" value="download" onclick="download(this.id)"></td>
@@ -37,7 +43,8 @@
     </table>
     <canvas id="myCanvas" width="800" height="800" style="border: 1px solid black;">
             show this message if the browser is not support Canvas.
-        </canvas>
+    </canvas>
+    
     <script src="canvas.js"></script>
 </body>
 
