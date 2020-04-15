@@ -6,24 +6,43 @@
     <title>Yu-canvas</title>
 
     <!-- CSS and javascript -->
-    <link rel="stylesheet" type="text/css" href="canvas.css">
+    <link rel="stylesheet" type="text/css" href="canvas.css" />
+
+    <!-- endbuild -->
 </head>
 
 <body>
     <table>
         <tr class="row">
-            <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id="pencil" value="pencil" onclick="changeMode(this.id)"></td>
-            <div class="slidecontainer">
-                <input type="range" id="brushes" name="brushes" min="1" max="50" value="5" style="display: none"></div>
-            <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id="eraser" value="eraser" onclick="changeMode(this.id)"></td>
-            <td><input type="button" style="background-color: #220901; color: white;width: 80px; height: 80px;" id="text" value="text" onclick="changeMode(this.id)"></td>
-            <td><input type="text" style="display: none" id="text-input" value=""></td>
-            <td><input type="button" style="background-color: #708B75; color: white;width: 80px; height: 80px;" id="color" value="color" onclick="color()"></td>
-            <td><input type="color" style="display: none" id="color-block"></td>
+            <td><label id="color_label" style="width: 58px; height: 57px text-align=center; line-height: 47px; margin-left: 2px; background: black" onclick=color_label.onchange>color</label></td>
+            <div id="color-picker" style="margin-left: 6px">
+                <canvas id="color_strip" width="30" height="150"></canvas>
+                <canvas id="color_block" width="150" height="150"></canvas></div>
+            <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id="background" value="background" onclick="background()"></td>
         </tr>
         <tr class="row">
-            <td><input type="button" style="background-color: #9AB87A; color: white;width: 80px; height: 80px;" id="download" value="download" onclick="download(this.id)"></td>
-            <td><label> upload<input id= upload type="file" size="80" accept= "image/*" onclick= upload.onchange ></label> </td>
+            <td><input type="button" style="background-color: #3D315B; color: white;width: 80px; height: 80px;" id="pencil" value="pencil" onclick="changeMode(this.id)"></td>
+            <div class="slidecontainer">
+                <input type="range" id="pencil_size" name="pencil_size" min="1" max="50" value="5" style="display: none"></div>
+            <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id="eraser" value="eraser" onclick="changeMode(this.id)"></td>
+            <div class="slidecontainer">
+                <input type="range" id="eraser_size" name="eraser_size" min="1" max="50" value="5" style="display: none"></div>
+            <td><input type="button" style="background-color: #220901; color: white;width: 80px; height: 80px;" id="text" value="text" onclick="changeMode(this.id)"></td>
+            <td><input type="text" style="display: none" id="text_input" value=""></td>
+            <td><select id="font" style="display: none" onclick="changeFont(this.value)">
+                <option id="font1" value="Arial">Arial</option>
+                <option id="font5" value="Verdana">Verdana</option>
+                <option id="font6" value="Courier New">Courier New</option>
+                <option id="font7" value="Times New Roman">Times New Roman</option>
+                <option id="font8" value="serif">serif</option>
+                <option id="font9" value="ans-serif">ans-serif</option>
+                <option id="font10" value="Comic Sans MS">Comic Sans MS</option>
+                <div class="slidecontainer">
+                    <input type="range" id="text_size" name="text_size" min="1" max="100" value="12" style="display: none"></div></select></td>
+        </tr>
+        <tr class="row">
+            <td><input type="button" style="background-color: #9AB87A; color: white;width: 80px; height: 80px; cursor: wait;" id="download" value="download" onclick="download()"></td>
+            <td><label style="cursor: wait; background-color: #BC3908">upload<input id="upload" type="file" size="80" accept="image/*" onclick= upload.onchange></label> </td>
             <td><input type="button" style="background-color: #444B6E; color: white;width: 80px; height: 80px;" id="redo" value="redo" onclick="redo()"></td>
             <td><input type="button" style="background-color: #708B75; color: white;width: 80px; height: 80px;" id="undo" value="undo" onclick="undo()"></td>
 
@@ -37,8 +56,16 @@
     </table>
     <canvas id="myCanvas" width="800" height="800" style="border: 1px solid black;">
             show this message if the browser is not support Canvas.
-        </canvas>
-    <script src="canvas.js"></script>
+    </canvas>
+
+    <!-- build:js -->
+
+    <script src="js/canvas.js"></script>
+    <script src="js/color.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/reset.js"></script>
+    <script src="js/download_upload.js"></script>
+    <script src="js/undo_redo.js"></script>
 </body>
 
 </html>

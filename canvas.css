@@ -1,3 +1,8 @@
+#myCanvas {
+    margin-right: 700px;
+    background: white;
+}
+
 #rectangle {
     width: 300px;
     height: 400px;
@@ -7,7 +12,6 @@
 
 label {
     padding: 10px;
-    background: #BC3908;
     display: table;
     color: #fff;
     width: 60px;
@@ -56,4 +60,24 @@ input[type="file"] {
     border-radius: 50%;
     background: #4CAF50;
     cursor: pointer;
+}
+
+#color-picker {
+    position: relative;
+    width: 180px;
+    height: 150px;
+}
+
+#color_label {
+    position: relative;
+    height: 10px;
+    width: 10px;
+}
+
+#color_block {
+    float: right;
+}
+
+#color_strip {
+    float: left;
 }
