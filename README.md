@@ -57,9 +57,9 @@
 #### c s s 檔
 * 利用css檔的table attribute，以及自訂的 id跟class ，float, inline 與 align等性質配合html排版。
 
-## Gitlab page link
+## Github page link
 
-   **https://heehee812.gitlab.io/AS_01_WebCanvas**
+   **https://heehee812.github.io/Web-Canvas/**
     
     
 ![](https://i.imgur.com/0BdzEjn.png)![](https://i.imgur.com/ETXcwON.png)![](https://i.imgur.com/JkOj20r.png)
