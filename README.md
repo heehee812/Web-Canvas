@@ -5,19 +5,18 @@
 
 | **Basic components**                             |  
 | :----------------------------------------------- |
-| Basic control tools: Pencil       |
+| Basic control tools: Pencil                      |
 | Change size                                      |
 | Cursor icon                                      |
 | Text input                                       |
 | Refresh button                                   |
-
 | **Advanced tools**                               |
 | Different brush shapes                           |
 | :----------------------------------------------- |
 | Un/Re-do button                                  |
 | Image tool: Upload                               |
 | Download                                         |
-| Background                                         |
+| Background                                       |
 
 ---
 
