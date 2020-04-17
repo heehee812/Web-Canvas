@@ -7,10 +7,6 @@ if (canvas != null) {
     alert("error");
 }
 
-let state = ctx.getImageData(0, 0, canvas.width, canvas.height);
-window.history.pushState(state, null); //put state in here
-window.addEventListener('popstate', lastStep, false);
-window.addEventListener('load', mode);
 
 
 function undo() {

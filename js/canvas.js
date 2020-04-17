@@ -4,6 +4,12 @@ var eraserSize = 5;
 var textSize = document.getElementById('text_size').value;
 var fontStyle = "Arial";
 
+let state = ctx.getImageData(0, 0, canvas.width, canvas.height);
+let scene = ctx.getImageData(0, 0, canvas.width, canvas.height);
+window.history.pushState(state, null); //put state in here
+window.addEventListener('popstate', lastStep, false);
+window.addEventListener('load', mode);
+
 //button state
 var pencilState = 0;
 var textState = 0;
@@ -56,7 +62,11 @@ function changeMode(a) {
         }
         canvas.style.cursor = "url('mouse_icon/text.png'), crosshair";
     } else if (a == "circle") {
-        canvas.style.cursor = "url('mouse_icon/cross.png'), crosshair";
+        canvas.style.cursor = "crosshair";
+    } else if (a == "square") {
+        canvas.style.cursor = "crosshair";
+    } else if (a == "triangle") {
+        canvas.style.cursor = "crosshair";
     } else if (a == "eraser") {
         if (eraserState == 0) {
             document.getElementById('eraser_size').style.display = "block";
@@ -94,31 +104,33 @@ function mode() {
             ctx.lineJoin = 'round';
             x1 = e.offsetX;
             y1 = e.offsetY;
-        } else if (modee == "circle") {
-            ctx.globalCompositeOperation = "source-over";
-            isMouseActive = true;
-            x1 = e.offsetX;
-            y1 = e.offsetY;
-        } else if (modee == "square") {
-            canvas.style.cursor = "url('mouse_icon/cross.png'), crosshair";
 
-            ctx.globalCompositeOperation = "source-over";
-            isMouseActive = true;
-            x1 = e.offsetX;
-            y1 = e.offsetY;
+        } else {
+            scene = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            if (modee == "circle") {
+                ctx.globalCompositeOperation = "source-over";
+                isMouseActive = true;
+                x1 = e.offsetX;
+                y1 = e.offsetY;
+            } else if (modee == "square") {
 
-        } else if (modee == "triangle") {
-            canvas.style.cursor = "url('mouse_icon/cross.png'), crosshair";
-            ctx.globalCompositeOperation = "source-over";
-            isMouseActive = true;
-            x1 = e.offsetX;
-            y1 = e.offsetY;
+                ctx.globalCompositeOperation = "source-over";
+                isMouseActive = true;
+                x1 = e.offsetX;
+                y1 = e.offsetY;
 
-        } else if (modee == "eraser") {
-            ctx.globalCompositeOperation = "destination-out";
-            isMouseActive = true;
-            x1 = e.offsetX;
-            y1 = e.offsetY;
+            } else if (modee == "triangle") {
+                ctx.globalCompositeOperation = "source-over";
+                isMouseActive = true;
+                x1 = e.offsetX;
+                y1 = e.offsetY;
+
+            } else if (modee == "eraser") {
+                ctx.globalCompositeOperation = "destination-out";
+                isMouseActive = true;
+                x1 = e.offsetX;
+                y1 = e.offsetY;
+            }
         }
     })
 
@@ -133,28 +145,36 @@ function mode() {
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
             ctx.stroke();
+
             x1 = x2;
             y1 = y2;
         } else if (modee == "circle") {
+            console.log(mode);
+            ctx.beginPath();
+            ctx.putImageData(scene, 0, 0);
             x2 = e.offsetX;
             y2 = e.offsetY;
-
-            ctx.beginPath();
             ctx.arc(x1, y1, Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)), 0, Math.PI * 2);
             ctx.fill();
+
         } else if (modee == "square") {
+            ctx.putImageData(scene, 0, 0);
             x2 = e.offsetX;
             y2 = e.offsetY;
-
+            ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
-
+            ctx.stroke();
+            ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
         } else if (modee == "triangle") {
+            ctx.putImageData(scene, 0, 0);
             x2 = e.offsetX;
             y2 = e.offsetY;
+            ctx.beginPath();
             ctx.moveTo(x1, y1);
-            ctx.lineTo(x1 + (((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)) ** (1 / Math.sqrt(3)), y2);
-            ctx.lineTo(x1 - (((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)) ** (1 / Math.sqrt(3)), y2);
+            ctx.lineTo(x1 + 2 * (x2 - x1) / 2, y2);
+            ctx.lineTo(x1 - 2 * (x2 - x1) / 2, y2);
+            ctx.fill();
         } else if (modee == "eraser") {
             x2 = e.offsetX;
             y2 = e.offsetY;
@@ -169,8 +189,28 @@ function mode() {
     canvas.addEventListener(upEvent, function(e) {
         isMouseActive = false;
         if (modee == "square") {
-            ctx.fillRect(x1, y1, x2, y2);
+            ctx.putImageData(scene, 0, 0);
+            x2 = e.offsetX;
+            y2 = e.offsetY;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
         } else if (modee == "triangle") {
+            ctx.putImageData(scene, 0, 0);
+            x2 = e.offsetX;
+            y2 = e.offsetY;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x1 + 2 * (x2 - x1) / 2, y2);
+            ctx.lineTo(x1 - 2 * (x2 - x1) / 2, y2);
+            ctx.fill();
+        } else if (modee == "circle") {
+            ctx.putImageData(scene, 0, 0);
+            x2 = e.offsetX;
+            y2 = e.offsetY;
+            ctx.arc(x1, y1, Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)), 0, Math.PI * 2);
             ctx.fill();
         }
         state = ctx.getImageData(0, 0, canvas.width, canvas.height);

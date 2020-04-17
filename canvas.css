@@ -1,13 +1,18 @@
 #myCanvas {
-    margin-right: 700px;
     background: white;
 }
 
-#rectangle {
-    width: 300px;
-    height: 400px;
-    margin-left: 900px;
-    background: #444B6E;
+#menu {
+    float: left;
+    line-height: 50px;
+    padding: 20px;
+    margin-right: 10px;
+}
+
+#canva {
+    float: left;
+    line-height: 50px;
+    padding: 20px;
 }
 
 label {
@@ -26,6 +31,12 @@ input[type="file"] {
 
 .slidecontainer {
     width: 100%;
+}
+
+#right {
+    position: relative;
+    margin-left: 1500px;
+    float: left;
 }
 
 .slider {
@@ -75,7 +86,7 @@ input[type="file"] {
 }
 
 #color_block {
-    float: right;
+    float: left;
 }
 
 #color_strip {

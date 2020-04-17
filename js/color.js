@@ -1,3 +1,17 @@
+var colorState = 0;
+
+function color() {
+    if (colorState == 0) {
+        document.getElementById('color_strip').style.display = "block";
+        document.getElementById('color_block').style.display = "block";
+        colorState = 1;
+    } else {
+        document.getElementById('color_strip').style.display = "none";
+        document.getElementById('color_block').style.display = "none";
+        colorState = 0;
+    }
+}
+
 var colorstrip = document.getElementById("color_strip");
 var strip = colorstrip.getContext('2d');
 strip_height = colorstrip.height;

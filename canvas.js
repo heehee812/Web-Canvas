@@ -53,7 +53,7 @@ function mode() {
 
         } else if (modee == "pencil") {
             canvas.style.cursor = "url('pecil.png', crosshair)";
-            ctx = canvas.getContext('2d');
+
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
             ctx.lineCap = 'round';
@@ -62,14 +62,14 @@ function mode() {
             y1 = e.offsetY;
         } else if (modee == "circle") {
             canvas.style.cursor = "url('cross.png', pointer)";
-            ctx = canvas.getContext('2d');
+
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
             x1 = e.offsetX;
             y1 = e.offsetY;
         } else if (modee == "square") {
             canvas.style.cursor = "url('cross.png'), pointer";
-            ctx = canvas.getContext('2d');
+
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
             x1 = e.offsetX;
@@ -77,7 +77,6 @@ function mode() {
 
         } else if (modee == "triangle") {
             canvas.style.cursor = "url('cross.png'), pointer";
-            ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = "source-over";
             isMouseActive = true;
             x1 = e.offsetX;
@@ -85,7 +84,6 @@ function mode() {
 
         } else if (modee == "eraser") {
             canvas.style.cursor = "url('eraser.png')";
-            ctx = canvas.getContext('2d');
             ctx.globalCompositeOperation = "destination-out";
             isMouseActive = true;
             x1 = e.offsetX;
@@ -109,14 +107,14 @@ function mode() {
         } else if (modee == "circle") {
             x2 = e.offsetX;
             y2 = e.offsetY;
-            ctx.fillStyle = "#621708";
+
             ctx.beginPath();
             ctx.arc(x1, y1, Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)), 0, Math.PI * 2);
             ctx.fill();
         } else if (modee == "square") {
             x2 = e.offsetX;
             y2 = e.offsetY;
-            ctx.fillStyle = "#941B0C";
+
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
 
@@ -126,7 +124,6 @@ function mode() {
             ctx.moveTo(x1, y1);
             ctx.lineTo(x1 + (((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)) ** (1 / Math.sqrt(3)), y2);
             ctx.lineTo(x1 - (((x2 - x1) ** 2 + (y2 - y1) ** 2) ** (1 / 2)) ** (1 / Math.sqrt(3)), y2);
-            ctx.fillStyle = "#F6AA1C";
         } else if (modee == "eraser") {
             x2 = e.offsetX;
             y2 = e.offsetY;
@@ -153,7 +150,7 @@ function mode() {
 }
 
 function color() {
-    document.getElementById('color-block').style.display = "block";
+    document.getElementById('color_block').style.display = "block";
     let colorInput = document.querySelector('#color');
     let hexInput = document.querySelector('#hex');
 
@@ -213,4 +210,80 @@ upload.onchange = function upload() {
 var slider = document.getElementById("brushes");
 slider.oninput = function() {
     ctx.lineWidth = this.value;
+};
+//--------------------------------------------------------------------
+var colorstrip = document.getElementById("color_strip");
+var strip = colorstrip.getContext('2d');
+strip_height = colorstrip.height;
+strip_width = colorstrip.width;
+
+var color_deep = document.getElementById('color_block');
+var block = color_deep.getContext('2d');
+block_height = color_deep.height;
+block_width = color_deep.width;
+
+strip.rect(0, 0, strip_width, strip_height);
+block.rect(1, 1, block_width, block_height);
+
+grad = strip.createLinearGradient(0, 0, 0, block_height);
+grad.addColorStop(0, 'rgba(255, 0, 0, 1)');
+grad.addColorStop(0.17, 'rgba(255, 255, 0, 1)');
+grad.addColorStop(0.34, 'rgba(0, 255, 0, 1)');
+grad.addColorStop(0.51, 'rgba(0, 255, 255, 1)');
+grad.addColorStop(0.68, 'rgba(0, 0, 255, 1)');
+grad.addColorStop(0.85, 'rgba(255, 0, 255, 1)');
+grad.addColorStop(1, 'rgba(255, 0, 0, 1)');
+
+//fill the gradient color in strip
+strip.fillStyle = grad;
+strip.fill();
+
+rgbacolor = 'rgba(255,0,0,1)';
+Gradient();
+colorstrip.addEventListener('click', color_change, false); //strip listen click to change color in color_block
+color_deep.addEventListener('click', deep, false); //color_block change deep to change label color
+
+function Gradient() {
+    block.fillStyle = rgbacolor;
+    block.fillRect(0, 0, block_width, block_height); //step 1: 先填滿block
+
+    //做白色漸層
+    grad_white = strip.createLinearGradient(0, 0, block_height, 0);
+    grad_white.addColorStop(0, 'rgba(255,255,255,1)');
+    grad_white.addColorStop(1, 'rgba(255,255,255,0)');
+    block.fillStyle = grad_white;
+    block.fillRect(0, 0, block_width, block_height);
+
+    //做黑色漸層
+    grad_black = strip.createLinearGradient(0, 0, 0, block_height);
+    grad_black.addColorStop(0, 'rgba(0,0,0,0)');
+    grad_black.addColorStop(1, 'rgba(0,0,0,1)');
+    block.fillStyle = grad_black;
+    block.fillRect(0, 0, block_width, block_height);
+}
+
+
+function color_change(e) {
+    mouse = {
+        x: e.offsetX,
+        y: e.offsetY
+    };
+
+    imgdata = strip.getImageData(mouse.x, mouse.y, 1, 1).data;
+    rgbacolor = 'rgba(' + imgdata[0] + ',' + imgdata[1] + ',' + imgdata[2] + ',1)';
+    Gradient();
+}
+
+
+function deep(e) {
+    mouse = {
+        x: e.offsetX,
+        y: e.offsetY
+    };
+    imgdata = block.getImageData(mouse.x, mouse.y, 1, 1).data;
+    rgbacolor = 'rgba(' + imgdata[0] + ',' + imgdata[1] + ',' + imgdata[2] + ',1)';
+    var Label = document.getElementById('color_label');
+    Label.style.backgroundColor = rgbacolor;
+    ctx.strokeStyle = rgbacolor;
+    ctx.fillStyle = rgbacolor;
 }
