@@ -11,6 +11,7 @@
 | Text input                                       |
 | Refresh button                                   |
 | **Advanced tools**                               |
+| :----------------------------------------------- |
 | Different brush shapes                           |
 | Un/Re-do button                                  |
 | Image tool: Upload                               |
@@ -37,7 +38,7 @@
 
 ## Function description
 
-  #### 分為下列八個 j s 檔:
+#### 分為下列八個 j s 檔:
 * **canvas.js**: 監聽及接收滑鼠與鍵盤事件，實現利用pencil, circle等圖形描繪的功能。
     * text 點選要打字的位置後，利用鍵盤監聽事件實現backspace與enter修改文字及換行的功能。
         點選其他處的同時，取消監聽，結束打字。
