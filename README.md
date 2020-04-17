@@ -1,5 +1,4 @@
-# Web-Canvas# Software Studio 2020 Spring
-## Assignment 01 Web Canvas
+# Web-Canvas
 
 ![](https://i.imgur.com/tI14dee.png) ![](https://i.imgur.com/BxtOE7L.png) ![](https://i.imgur.com/wainyDW.png)
 
