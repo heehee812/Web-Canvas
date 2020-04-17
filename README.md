@@ -12,7 +12,6 @@
 | Refresh button                                   |
 | **Advanced tools**                               |
 | Different brush shapes                           |
-| :----------------------------------------------- |
 | Un/Re-do button                                  |
 | Image tool: Upload                               |
 | Download                                         |
