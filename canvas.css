@@ -1,5 +1,6 @@
 #myCanvas {
     background: white;
+    border-radius: 30% 50%;
 }
 
 #menu {
@@ -10,9 +11,13 @@
 }
 
 #canva {
-    float: left;
     line-height: 50px;
     padding: 20px;
+    margin-left: 10px;
+}
+
+body {
+    background-image: url("mouse_icon/background.png");
 }
 
 label {
