@@ -68,10 +68,3 @@
     
 ![](https://i.imgur.com/0BdzEjn.png)![](https://i.imgur.com/ETXcwON.png)![](https://i.imgur.com/JkOj20r.png)
 
-
-
-<style>
-table th{
-    width: 100%;
-}
-</style>
