@@ -3,10 +3,9 @@
 ![](https://i.imgur.com/tI14dee.png) ![](https://i.imgur.com/BxtOE7L.png) ![](https://i.imgur.com/wainyDW.png)
 
 ## Go to the canvas
-:point_down: **click**
+:point_down: [Click here for Demo](https://heehee812.gitlab.io/AS_01_WebCanvas/)
 
-**https://heehee812.gitlab.io/AS_01_WebCanvas/**
-
+## Description
 | **Basic components**                             |  
 | :----------------------------------------------- |
 | Basic control tools: Pencil                      |
